@@ -9,7 +9,6 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-exit 0
 apt-get install mercurial
 apt-get install ncurses-dev
 apt-get install gtk2-engines-pixbuf
