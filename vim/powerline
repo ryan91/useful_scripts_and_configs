@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# check if directory exists
+if [ -d $HOME/.vim/bundle ];then
+  cd $HOME/.vim/bundle
+  git clone https://github.com/Lokaltog/vim-powerline.git
+  cd -
+else
+  echo "this installation requires pathogen to work properly (actually the
+  directory ~/.vim/bundle and pathogen)"
+fi
