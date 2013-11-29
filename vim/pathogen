@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# create necessary folders
+mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle
+
+# get pathogen
+wget -O $HOME/.vim/autoload/pathogen.vim \
+https://github.com/tpope/vim-pathogen/raw/master/autoload/pathogen.vim
+
+# in .vimrc add line:
+#call pathogen#infect()
