@@ -1,0 +1,36 @@
+#!/bin/bash
+# =============================================================================
+# Installs vim (compiles from source)
+# =============================================================================
+
+# User must be root
+if [ "$EUID" -ne 0 ]; then
+  echo "This script must be executed as root"
+  exit 1
+fi
+
+exit 0
+apt-get install mercurial
+apt-get install ncurses-dev
+apt-get install gtk2-engines-pixbuf
+
+# get vim source
+hg clone https://vim.googlecode.com/hg/ vim
+cd vim/src
+
+# installation process
+.configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
+make && make install
+
+# create link in /usr/bin
+cd /usr/bin/
+ln -s $HOME/opt/vim/bin/vim
+
+# check if correctly installed
+vim --version
+
+# create directory for color schemes
+mkdir -p ~/.vim/colors && cd ~/.vim/colors
+wget -O wombat256mod.vim \
+       	http://www.vim.org/scripts/download_script.php?src_id=13400
+
