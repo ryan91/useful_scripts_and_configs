@@ -22,6 +22,13 @@ searchInDirectory() {
     echo "error in .bashrc!"
   fi
 }
+silentBackgroundJob() {
+  if [ ${#} == 1 ]; then
+    $1 > /dev/null 2>&1 &
+  else
+    echo "Please set one parameter."
+  fi
+}
 # watch out - overwrites /bin/open
 alias open=openFile
 # enables executing files from current directory without using "./"
@@ -34,3 +41,4 @@ alias shist=searchInHistory
 alias lg='searchInDirectory 1'
 alias llg='searchInDirectory 2'
 alias lllg='searchInDirectory 3'
+alias sjob=silentBackgroundJob
