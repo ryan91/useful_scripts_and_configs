@@ -37,6 +37,8 @@ export PATH=$PATH:.
 export HISTSIZE=1500
 # search for expression in history
 alias shist=searchInHistory
+# define custom $PS1
+PS1='\[\033[01;33m\]\u\[\033[00;36m\]@\[\033[00;31m\]\W\[\033[00;36m\]:\[\033[00m\] '
 # search for name in current directory
 alias lg='searchInDirectory 1'
 alias llg='searchInDirectory 2'
