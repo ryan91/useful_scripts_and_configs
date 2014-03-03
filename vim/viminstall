@@ -18,7 +18,7 @@ hg clone https://vim.googlecode.com/hg/ vim
 cd vim/src
 
 # installation process
-.configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
+./configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
 make && make install
 
 # create link in /usr/bin
