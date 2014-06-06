@@ -9,27 +9,35 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-apt-get install mercurial
-apt-get install ncurses-dev
-apt-get install gtk2-engines-pixbuf
+apt-get install mercurial python python-dev python3 python3-dev ruby \
+  ruby-dev libx11-dev libgtk2.0-dev libncurses5
 
-# get vim source
 hg clone https://vim.googlecode.com/hg/ vim
 cd vim/src
-
-# installation process
-./configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
-make && make install
-
+./configure \
+    --enable-perlinterp \
+    --enable-python3interp \
+    --enable-rubyinterp \
+    --enable-cscope \
+    --enable-gui=auto \
+    --enable-gtk2-check \
+    --enable-gnome-check \
+    --with-features=huge \
+    --enable-multibyte \
+    --with-features=huge \
+    --with-x \
+    --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu
+    --prefix=/home/ryan91/opt/vim
+make
+make install
 # create link in /usr/bin
 cd /usr/bin/
-ln -s $HOME/opt/vim/bin/vim
+ln -s /home/ryan91/opt/vim/bin/vim
 
 # check if correctly installed
 vim --version
 
 # create directory for color schemes
-mkdir -p ~/.vim/colors && cd ~/.vim/colors
-wget -O wombat256mod.vim \
-       	http://www.vim.org/scripts/download_script.php?src_id=13400
-
+# mkdir -p ~/.vim/colors && cd ~/.vim/colors
+# wget -O wombat256mod.vim \
+#       	http://www.vim.org/scripts/download_script.php?src_id=13400
