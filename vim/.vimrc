@@ -1,19 +1,10 @@
 autocmd! bufwritepost .vimrc source %
 
-" Show trailing whitespace
-" Must be inserted before the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
-
-" setup Pathogen to manage your plugins
-call pathogen#infect()
-
 " auto indention when line breaking
 set autoindent
 
 set pastetoggle=<F2>
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " rebind mapleader key
 let mapleader = ","
@@ -29,6 +20,12 @@ inoremap <C-P> <C-O>:update<CR>
 noremap <Leader>q :quit<CR>
 noremap <Leader>Q :qa!<CR>
 
+" override movement keys
+noremap ö l
+noremap l k
+noremap k j
+noremap j h
+
 " for window movement
 "map <c-j> <c-w>j
 "map <c-k> <c-w>k
@@ -39,13 +36,18 @@ noremap <Leader>Q :qa!<CR>
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
-" sort function 
+" sort function
 " vnoremap <Leader>s :sort<CR>
 
 " enable '</>' key for indent manipulation
 vnoremap < <gv
 vnoremap > >gv
 
+" Show trailing whitespace
+" Must be inserted before the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color Scheme
 set t_Co=256
@@ -76,9 +78,9 @@ nmap <Leader>f gqap
 " set undolevels=700
 
 " use spaces instead of tabs
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set shiftround
 set expandtab
 
@@ -93,8 +95,33 @@ set smartcase
 " set nowritebackup
 set noswapfile
 
+" setup Pathogen to manage your plugins
+call pathogen#infect()
+
 " ============================================================================
 " Python IDE setup
 " ============================================================================
 " settings for vim powerline
 set laststatus=2
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd BufReadPost,BufWritePost *.tex set omnifunc=LatexBox_Complete
+
+function! Auto_complete_string()
+    if pumvisible()
+        return "\<C-n>"
+    else
+        return "\<C-x>\<C-o>\<C-r>=Auto_complete_opened()\<CR>"
+    end
+endfunction
+
+function! Auto_complete_opened()
+    if pumvisible()
+        return "\<Down>"
+    end
+    return ""
+endfunction
+
+inoremap <expr> <Nul> Auto_complete_string()
+inoremap <expr> <C-Space> Auto_complete_string()
+set omnifunc=syntaxcomplete#Complete
