@@ -20,6 +20,18 @@ inoremap <C-P> <C-O>:update<CR>
 noremap <Leader>q :quit<CR>
 noremap <Leader>Q :qa!<CR>
 
+" leader e <- add empty line below the current line
+" leader E <- add empty line above the current line
+nnoremap <silent><Leader>e :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><Leader>E :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+" various ways to get out of insert mode
+inoremap qq <Esc>
+inoremap <C-i> <Esc>
+
+" switch off highlight
+noremap <silent><C-h> :noh<CR>
+
 " override movement keys
 noremap ö l
 noremap l k
