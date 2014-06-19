@@ -26,8 +26,10 @@ nnoremap <silent><Leader>e :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><Leader>E :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " various ways to get out of insert mode
-inoremap qq <Esc>
-inoremap <C-i> <Esc>
+inoremap jj <Esc>
+
+" remove trailing whitespace
+noremap <Leader>F :%s/^\s\+$//<CR> :%s/\s\+$//<CR>
 
 " switch off highlight
 noremap <silent><C-h> :noh<CR>
