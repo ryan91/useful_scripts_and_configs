@@ -44,3 +44,5 @@ alias lg='searchInDirectory 1'
 alias llg='searchInDirectory 2'
 alias lllg='searchInDirectory 3'
 alias sjob=silentBackgroundJob
+# wrapper for stdout -> clipboard
+alias clipboard='xargs printf | xclip -sel C'
