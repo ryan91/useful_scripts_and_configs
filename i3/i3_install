@@ -1,0 +1,13 @@
+#!/bin/bash
+
+I3_CONFIG_PATH='./config_desktop'
+# install main package
+apt-get install i3 i3lock suckless-tools i3status libcap2-bin
+
+# create .i3 home directory if it doesn't exist
+if [ ! -d ~/.i3 ]; then
+    mkdir ~/.i3
+fi
+
+# cp i3-config -> .i3
+cp -f $I3_CONFIG_PATH ~/.i3/config
