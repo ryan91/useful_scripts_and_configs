@@ -29,20 +29,39 @@ silentBackgroundJob() {
     echo "Please set one parameter."
   fi
 }
+
+# setup rm -> move to trash alias environment
+TRASH='/tmp/trash'
+if [ ! -d "$TRASH" ]; then
+    mkdir "$TRASH"
+fi
+move_to_trash() {
+    mv "$@" "$TRASH"
+}
+alias remove='\rm'
+alias rm='move_to_trash'
+alias emptytrash="remove -rf $TRASH/*"
+
 # watch out - overwrites /bin/open
 alias open=openFile
+
 # enables executing files from current directory without using "./"
 export PATH=$PATH:.
+
 # get bigger history
 export HISTSIZE=1500
+
 # search for expression in history
 alias shist=searchInHistory
+
 # define custom $PS1
 PS1='\[\033[01;33m\]\u\[\033[00;36m\]@\[\033[00;31m\]\W\[\033[00;36m\]:\[\033[00m\] '
+
 # search for name in current directory
 alias lg='searchInDirectory 1'
 alias llg='searchInDirectory 2'
 alias lllg='searchInDirectory 3'
 alias sjob=silentBackgroundJob
+
 # wrapper for stdout -> clipboard
 alias clipboard='xargs printf | xclip -sel C'
