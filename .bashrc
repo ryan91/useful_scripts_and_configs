@@ -36,7 +36,13 @@ if [ ! -d "$TRASH" ]; then
     mkdir "$TRASH"
 fi
 move_to_trash() {
-    mv "$@" "$TRASH"
+    # quick fix for desktop
+    # TODO solve this problem properly
+    if [[ $(pwd) == /storage* ]]; then
+        remove "$@"
+    else
+        mv "$@" "$TRASH"
+    fi
 }
 alias remove='\rm'
 alias rm='move_to_trash'
