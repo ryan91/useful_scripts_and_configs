@@ -82,6 +82,7 @@ install_pacakge "pkg-config"
 install_package "git"
 install_package "cmake"
 install_package "libssh-dev"
+install_package "xterm"
 
 echo "==> getting codelite source from github <=="
 git clone "$git_url"
