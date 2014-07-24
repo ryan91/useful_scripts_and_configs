@@ -1,0 +1,114 @@
+#!/bin/bash
+
+wxwidgets_path="/usr/lib/wxWidgets"
+cgp="~/Documents/git/"
+git_url="https://github.com/eranif/codelite.git"
+
+install_package() {
+    dpkg -s "$1" > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "~> Package '$1' not found - installing..."
+        apt-get install "$1"
+        if [ $? -ne 0 ]; then
+            echo "~> something went wrong during the installlation process - Going to exit"
+            exit 1
+        fi
+    else
+        echo "~> Package '$1' is already installed"
+    fi
+}
+
+# make script exit if the execution of a command fails
+# set -e
+
+if [ ! -d "$cgp" ]; then
+    echo "~> the directory for the codelite git repository is invalid - Going to exit"
+    exit 1
+fi
+
+# check what packages are installed and install missing ones
+echo "==> installing wxWidgets <=="
+echo "~> checking dependencies..."
+install_package "build-essential"
+install_package "libgtk2.0-dev"
+
+# create directory for wxWidgets library
+if [ ! -d "$wxwidgets_path" ]; then
+    mkdir -p "$wxwidgets_path"
+fi
+
+wget -O "/tmp/wxSource.tar.bz2" 'https://sourceforge.net/projects/wxwindows/files/3.0.1/wxWidgets-3.0.1.tar.bz2'
+if [ $? -ne 0 ]; then
+    echo "~> link to wxwidgets source not valid - Going to exit"
+    exit 1
+fi
+
+cd "/tmp/"
+tar -C "$wxwidgets_path" -xjvf "wxSource.tar.bz2"
+if [ $? -ne 0 ]; then
+    echo "~> Could not extract wxwidgets source to $wxwidgets_path - Going to exit"
+    exit 1
+fi
+
+cd "$wxwidgets_path"
+cd $(ls | grep -i "wxwidgets")
+if [ $? -ne -0 ]; then
+    echo "~> Could not switch to installation directory- Going to exit"
+    exit 1
+fi
+
+mkdir "gtk-build" && cd "gtk-build"
+../configure --enable-unicode
+if [ $? -ne 0 ]; then
+    echo "~> some required packages are missing - Please install them manually before continuing"
+    exit 1
+fi
+
+echo "~> trying to build target..."
+make
+if  [ $? -ne 0 ]; then
+    echo "~> compilation failed - please have a look at the error message to fix this"
+    exit 1
+fi
+make install
+if [ $? -ne 0 ]; then
+    echo "~> installation failed - please have a look at the error message to fix this"
+    exit 1
+fi
+
+echo "==> installing dependencies <=="
+install_package "libgtk2.0-dev"
+install_pacakge "pkg-config"
+install_package "git"
+install_package "cmake"
+install_package "libssh-dev"
+
+echo "==> getting codelite source from github <=="
+git clone "$git_url"
+if [ $? -ne 0 ]; then
+    echo "~> could not get source - please check if you have the correct git URL"
+    exit 1
+fi
+
+cd codelite
+mkdir build-release && cd build-release
+echo "==> installing codelite <=="
+echo "~> generating makefile..."
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+if [ $? -ne 0 ]; then
+    echo "~> could not generate makefile - Going to exit"
+    exit 1
+fi
+echo "~> compiling..."
+make -j4
+if [ $? -ne 0 ]; then
+    echo "~>compilation error - Going to exit"
+    exit 1
+fi
+make install
+if [ $? -ne 0 ]; then
+    echo "~> installation error - Going to exit"
+fi
+echo "==> DONE!!! <=="
+exit 0
+
