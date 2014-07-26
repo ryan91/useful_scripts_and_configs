@@ -1,0 +1,6 @@
+#deb cdrom:[Linux Mint 16 _petra_ - Release amd64 20131126]/ saucy contrib main non-free
+#deb http://packages.linuxmint.com/ubuntu/ saucy main restricted universe multiverse
+#deb http://packages.linuxmint.com/ubuntu/ saucy-updates main restricted universe multiverse
+#deb http://security.ubuntu.com/ubuntu/ saucy-security main restricted universe multiverse
+#deb http://archive.canonical.com/ubuntu/ saucy partner
+deb http://us.archive.ubuntu.com/ubuntu trusty main universe
