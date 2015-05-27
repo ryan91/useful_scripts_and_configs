@@ -27,28 +27,35 @@ nnoremap <silent><Leader>E :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " various ways to get out of insert mode
 inoremap jj <Esc>
+inoremap <C-j> <Esc>
 
 " remove trailing whitespace
 noremap <Leader>F :%s/^\s\+$//<CR> :%s/\s\+$//<CR>
 
 " switch off highlight
 noremap <silent><C-h> :noh<CR>
-
 " override movement keys
 noremap ö l
 noremap l k
 noremap k j
 noremap j h
 
-" for window movement
-"map <c-j> <c-w>j
+" for split window movement
+noremap <c-n> <c-w><c-h>
+noremap <c-m> <c-w><c-l>
 "map <c-k> <c-w>k
 "map <c-l> <c-w>l
 "map <c-j> <c-w>j
 
 " switching between tabs
+map <Leader>t <esc>:tabnew<CR>
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
+
+" split interface
+map <Leader>h <esc>:vsplit<CR>
+" switch between tabs
+map <Leader>w <c-w>w
 
 " sort function
 " vnoremap <Leader>s :sort<CR>
@@ -79,8 +86,8 @@ set number " show line numbers
 set tw=79  " width of document
 set nowrap " don't automatically wrap on load
 
-set fo-=t  " don't automatically wrap when typing
-set colorcolumn=80
+"set fo-=t  " don't automatically wrap when typing
+" set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
 " rearanges everything over the max line
