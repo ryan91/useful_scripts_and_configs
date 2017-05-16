@@ -41,7 +41,7 @@ nnoremap <silent><Leader>e :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><Leader>E :set paste<CR>m`O<Esc>``:set nopaste<CR>
 inoremap jj <Esc>
 inoremap <C-j> <Esc>
-noremap <Leader>F :%s/^\s\+$//<CR> :%s/\s\+$//<CR>
+noremap <Leader>F :%s/\s\+$//<CR>
 noremap <silent><C-h> :noh<CR>
 map <Leader>t <esc>:tabnew<CR>
 map <Leader>n <esc>:tabprevious<CR>
