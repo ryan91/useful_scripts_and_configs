@@ -42,16 +42,10 @@ if exists('+colorcolumn')
   set colorcolumn=80
 endif
 
-augroup vimrcFold
+augroup rcFold
   autocmd!
-  autocmd FileType vim set foldmethod=marker
-  autocmd FileType vim set foldlevel=0
-augroup end
-
-augroup i3configFold
-  autocmd!
-  autocmd FileType conf set foldmethod=marker
-  autocmd FileType conf set foldlevel=0
+  autocmd FileType vim,zsh,conf set foldmethod=marker
+  autocmd FileType vim,zsh,conf set foldlevel=0
 augroup end
 " }}}
 
