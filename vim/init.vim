@@ -105,7 +105,7 @@ Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'hzchirs/vim-material'
 Plug 'morhetz/gruvbox'
-Plug 'nbouscal/vim-stylish-haskell', { 'for' : 'haskell' }
+Plug 'expipiplus1/vim-stylish-haskell', { 'for' : 'haskell' } " this is a fork!
 Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
@@ -137,12 +137,16 @@ noremap <silent><leader>d :NERDTreeToggle<cr>
 endif
 " }}}
 " {{{ ghc-mod
-noremap <leader>hc :GhcModCheck<cr>
-noremap <leader>hl :GhcModLint<cr>
-noremap <leader>ht :GhcModType<cr>
+if filereadable(expand('$HOME/.config/nvim/plugged/ghcmod-vim/plugin/ghcmod.vim'))
+  noremap <leader>hc :GhcModCheck<cr>
+  noremap <leader>hl :GhcModLint<cr>
+  noremap <leader>ht :GhcModType<cr>
+endif
 " }}}
 " {{{ stylish-haskell
+if filereadable(expand('$HOME/.config/nvim/plugged/vim-stylish-haskell/ftplugin/haskell/stylish-haskell.vim'))
 noremap <leader>hf :call StylishHaskell()<cr>
+endif
 " }}}
 " }}}
 " }}}
