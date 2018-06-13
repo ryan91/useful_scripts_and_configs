@@ -29,11 +29,16 @@ set smartcase
 " {{{ Buffers
 set hidden
 noremap <silent><leader>q :bp\|bd #<cr>
-noremap <silent><leader>q :bp\|bd! #<cr>
+noremap <silent><leader>Q :bp\|bd! #<cr>
 nnoremap <silent><leader><leader> :b#<cr>
 " }}}
 " {{{ Highlighting
 noremap <silent><leader>h :noh<cr>
+" }}}
+" {{{ Color column
+if exists('+colorcolumn')
+  set colorcolumn=80
+endif
 " }}}
 " {{{ Intentation
 vnoremap < <gv
@@ -100,19 +105,21 @@ endif
 " }}}
 " {{{ Plugin installation
 call plug#begin('~/.config/nvim/plugged/')
+Plug 'brookhong/cscope.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
+Plug 'expipiplus1/vim-stylish-haskell', { 'for' : 'haskell' } " this is a fork!
 Plug 'hzchirs/vim-material'
 Plug 'morhetz/gruvbox'
-Plug 'expipiplus1/vim-stylish-haskell', { 'for' : 'haskell' } " this is a fork!
-Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
+" Plug 'neovimhaskell/haskell-vim', { 'for' : 'haskell' }
+Plug 'dag/vim2hs'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/vimproc.vim' " dependency of ghcmod
+Plug 'spf13/vim-autoclose'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'spf13/vim-autoclose'
 call plug#end()
 " }}}
 " {{{ Plugin configuration
@@ -138,15 +145,31 @@ endif
 " }}}
 " {{{ ghc-mod
 if filereadable(expand('$HOME/.config/nvim/plugged/ghcmod-vim/plugin/ghcmod.vim'))
-  noremap <leader>hc :GhcModCheck<cr>
-  noremap <leader>hl :GhcModLint<cr>
-  noremap <leader>ht :GhcModType<cr>
+  noremap <silent><leader>hc :GhcModCheck<cr>
+  noremap <silent><leader>hl :GhcModLint<cr>
+  noremap <silent><leader>ht :GhcModType<cr>
+  noremap <silent><leader>hq :GhcModTypeClear<cr>
 endif
 " }}}
 " {{{ stylish-haskell
 if filereadable(expand('$HOME/.config/nvim/plugged/vim-stylish-haskell/ftplugin/haskell/stylish-haskell.vim'))
-noremap <leader>hf :call StylishHaskell()<cr>
+  noremap <leader>hf :call StylishHaskell()<cr>
 endif
+" }}}
+" {{{ cscope
+if filereadable(expand('$HOME/.config/nvim/plugged/cscope.vim/plugin/cscope.vim'))
+  nnoremap <leader>fs :call CscopeFind('s', expand('<cword>'))<cr>
+  nnoremap <leader>fg :call CscopeFind('g', expand('<cword>'))<cr>
+  nnoremap <leader>fd :call CscopeFind('d', expand('<cword>'))<cr>
+  nnoremap <leader>fc :call CscopeFind('c', expand('<cword>'))<cr>
+  nnoremap <leader>ft :call CscopeFind('t', expand('<cword>'))<cr>
+  nnoremap <leader>fe :call CscopeFind('e', expand('<cword>'))<cr>
+  nnoremap <leader>ff :call CscopeFind('f', expand('<cword>'))<cr>
+  nnoremap <leader>fi :call CscopeFind('i', expand('<cword>'))<cr>
+endif
+" }}}
+" {{{ vim2hs
+let g:haskell_conceal=0
 " }}}
 " }}}
 " }}}
