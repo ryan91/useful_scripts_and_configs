@@ -180,7 +180,7 @@ Plug 'vim-airline/vim-airline'                                " Status bar etc.
 Plug 'vim-airline/vim-airline-themes'                         " Themes for status bar
 Plug 'vim-scripts/haskell.vim', { 'for' : 'haskell' }         " Haskell highlighting
 call plug#end()
-}}}
+" }}}
 " {{{ <<< Plugin configuration >>>
 " {{{ gruvbox and airline
 if filereadable(expand('$HOME/.config/nvim/plugged/gruvbox/colors/gruvbox.vim'))
@@ -191,6 +191,7 @@ if filereadable(expand('$HOME/.config/nvim/plugged/gruvbox/colors/gruvbox.vim'))
     let g:airline_symbols = {}
   endif
   let g:airline_symbols.linenr='Ξ'
+  let g:airline_symbols.whitespace = '✗'
 endif
 " }}}
 " {{{ CtrlP
