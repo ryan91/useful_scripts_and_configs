@@ -1,0 +1,3 @@
+! font repo: https://github.com/powerline/fonts
+URxvt*font: xft:Meslo LG M DZ for Powerline:size=10
+URxvt*letterSpace: -1
