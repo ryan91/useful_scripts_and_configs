@@ -6,8 +6,8 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="odin"
-ZSH_THEME="robbyrussell"
+# good minimalistic theme: "odin"
+ZSH_THEME="junkfood"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -111,32 +111,11 @@ export u4='../../../..'
 export u5='../../../../..'
 alias vim='nvim'
 
+# for starting background jobs
+silent() { "$@" > /dev/null 2>&1 & }
+
 #}}}
 
 # {{{ Specific aliases for this machine
-
-export TEGRA='ubuntu@10.42.0.39:/home/ubuntu/boekle'
-
-export TIMR_ROOT='/export/home/runge/repos/timing-annotation/external/timr'
-
-alias cdtimr='cd $TIMR_ROOT'
-
-alias cdseafile='cd /export/home/runge/Seafile'
-
-alias chere='cmake3 -H. -Bbuild -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
-
-alias cupper='cmake3 -H.. -B. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
-
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/afs/wsi/es/tools/gcc/6.3/lib64
-
-export PATH=/opt/vim/bin:${PATH}
-
-export MANPATH=/opt/texlive/2017/texmf-dist/doc/man:${MANPATH}
-export INFOPATH=/opt/texlive/2017/texmf-dist/doc/info:${INFOPATH}
-export PATH=/opt/texlive/2017/bin/x86_64-linux:${PATH}
-
-# source /afs/wsi/es/tools/FreeRDP/settings.sh
-
-export PATH="$HOME/.cabal/bin":$PATH
 
 # }}}
